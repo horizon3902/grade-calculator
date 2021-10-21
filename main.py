@@ -13,8 +13,17 @@ headerAndCol = {}
 for i in range(3, max_column):
     headerAndCol[dataSet.columns[i]] = dataSet.loc[:,dataSet.columns[i]].values
 
-print(headerAndCol)
 # print(col)
+# figure, axis = plt.subplots(max_column/3, 3)
+for i in headerAndCol:
+    mean = np.mean(headerAndCol[i])
+    std = np.std(headerAndCol[i])
+    dist = np.random.normal(mean, std, size=len(headerAndCol[i]))
+    count, bins, ignored = plt.hist(dist, 30, density=True)
+    plt.plot(bins, 1/(std * np.sqrt(2 * np.pi)) * np.exp( - (bins - mean)**2 / (2 * std**2) ),linewidth=2, color='r')
+    plt.title(i)
+    plt.show()
+
 # mean = np.mean(col)
 # standardDeviation = np.std(col)
 # print(mean, standardDeviation)
