@@ -2,7 +2,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+# Excel Temp
+~$*.xlsx
 # C extensions
 *.so
 
