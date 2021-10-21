@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 # Excel Temp
 ~$*.xlsx
+Grades.xlsx
 # C extensions
 *.so
 

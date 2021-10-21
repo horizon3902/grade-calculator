@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import matplotlib.pyplot as plt
 import scipy.stats as stats
+import xlsxwriter as xl
 
 path = "DataSet//dataSetFormat.xlsx"
 dataSet = pd.read_excel(path)
@@ -25,6 +26,44 @@ for i in headerAndCol:
     idx += 1 
 
 plt.show()
+
+def marksToGrades(headCol, dataSet):
+    result = {}
+    for i in range(0, 4):
+        result[dataSet.columns[i]] = dataSet.loc[:,dataSet.columns[i]].values
+    for i in headCol:
+        arr = headCol[i]
+        mean = np.mean(headerAndCol[i])
+        std = np.std(headerAndCol[i])
+        grade = []
+        for mark in arr:
+            if(mark >= mean + 1.5*std):
+                grade.append("AA")
+            elif(mark >= mean + std):
+                grade.append("AB")
+            elif(mark >= mean + 0.5*std):
+                grade.append("BB")
+            elif(mark >= mean):
+                grade.append("BC")
+            elif(mark >= mean - 0.5*std):
+                grade.append("CC")
+            elif(mark >= mean - std):
+                grade.append("CD")
+            elif(mark >= mean - 1.5*std):
+                grade.append("DD")
+            else:
+                grade.append("FF")
+        result[i] = grade
+    return result
+    
+res = marksToGrades(headerAndCol, dataSet)
+newDataSet = pd.DataFrame(res)
+newDataSet.to_excel("Grades.xlsx")
+# workbook = xl.Workbook('Grades.xlsx')
+# worksheet = workbook.add_worksheet()
+# row = 0
+# column = 0
+
 
 # mean = np.mean(col)
 # standardDeviation = np.std(col)
