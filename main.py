@@ -1,11 +1,11 @@
+"""This code generates normal distribution curve & grades of students
+& exports it to an excel file"""
+
+import sys
+import ctypes
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-from time import sleep
-import ctypes
-
-"""This code generates normal distribution curve & grades of students
-& exports it to an excel file"""
 
 class GradeGen:
     def __init__(self, path="DataSet//dataSetFormat.xlsx"):  # initialise constructor
@@ -15,7 +15,7 @@ class GradeGen:
             self.data_set = pd.read_excel(path)
         except FileNotFoundError:
             print("No such File exists on given path!")
-            quit()
+            sys.exit()
         self.max_column = len(self.data_set.columns)
 
     def load(self):  # Prepares a dictionary of subject name as key and an array of marks of all students serially as value
@@ -79,7 +79,7 @@ class GradeGen:
         result = self.marks_to_grades()
         data_frame = pd.DataFrame(result)
         data_frame.set_index(self.data_set.columns[0], inplace=True)
-        while True:
+        while True:     # Tries to save the file with the given filename, if it is open, then pop up asks to close it
             try:
                 data_frame.to_excel("Grades.xlsx")
             except PermissionError:
