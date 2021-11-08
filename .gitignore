@@ -5,6 +5,7 @@ __pycache__/
 # Excel Temp
 ~$*.xlsx
 Grades.xlsx
+.idea
 # C extensions
 *.so
 
