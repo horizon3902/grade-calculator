@@ -2,9 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from time import sleep
+import ctypes
+
 """This code generates normal distribution curve & grades of students
 & exports it to an excel file"""
-
 
 class GradeGen:
     def __init__(self, path="DataSet//dataSetFormat.xlsx"):  # initialise constructor
@@ -82,9 +83,7 @@ class GradeGen:
             try:
                 data_frame.to_excel("Grades.xlsx")
             except PermissionError:
-                print("File is already open or invalid permission")
-                print("Please close the file and try again")
-                sleep(5)
+                ctypes.windll.user32.MessageBoxW(None, "Grades.xlsx is already open or invalid permission.\nClose file and try again.", 'GradeGen ALERT!!', 0x1000)
             else:
                 break
 
