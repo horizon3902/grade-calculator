@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+from time import sleep
 """This code generates normal distribution curve & grades of students
 & exports it to an excel file"""
 
@@ -47,8 +48,7 @@ class GradeGen:
         header_col = self.load()
         result = {}
         for i in range(0, 4):
-            result[self.data_set.columns[i]] = self.data_set.loc[:,
-                                                                 self.data_set.columns[i]].values
+            result[self.data_set.columns[i]] = self.data_set.loc[:, self.data_set.columns[i]].values
         for i in header_col:
             arr = header_col[i]
             mean = np.mean(header_col[i])
@@ -77,7 +77,16 @@ class GradeGen:
     def write_to_excel(self):   # Makes an excel sheet from a dictionary
         result = self.marks_to_grades()
         data_frame = pd.DataFrame(result)
-        data_frame.to_excel("Grades.xlsx")
+        data_frame.set_index(self.data_set.columns[0], inplace=True)
+        while True:
+            try:
+                data_frame.to_excel("Grades.xlsx")
+            except PermissionError:
+                print("File is already open or invalid permission")
+                print("Please close the file and try again")
+                sleep(5)
+            else:
+                break
 
 
 if __name__ == "__main__":
