@@ -50,10 +50,10 @@ class GradeGen:
         result = {}
         for i in range(0, 4):
             result[self.data_set.columns[i]] = self.data_set.loc[:, self.data_set.columns[i]].values
-        for i in header_col:
-            arr = header_col[i]
-            mean = np.mean(header_col[i])
-            std = np.std(header_col[i])
+        for i in header_col.items():
+            arr = i[1]
+            mean = np.mean(i[1])
+            std = np.std(i[1])
             grade = []
             for mark in arr:  # conditions for different grades
                 if mark >= mean + 1.5 * std:
@@ -72,7 +72,7 @@ class GradeGen:
                     grade.append("DD")
                 else:
                     grade.append("FF")
-            result[i] = grade
+            result[i[0]] = grade
         return result
 
     def write_to_excel(self):   # Makes an excel sheet from a dictionary
