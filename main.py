@@ -9,7 +9,7 @@ import pandas as pd
 np.random.seed(0)
 
 class GradeGen:
-    def __init__(self, path="DataSet//dataSetFormat.xlsx"):  # initialise constructor
+    def __init__(self, path="marksheet.xlsx"):  # initialise constructor
         self.path = path  # sets path to marksheet
         try:
             # convert it into pandas dataframe
