@@ -15,7 +15,7 @@ class GradeGen:
             # convert it into pandas dataframe
             self.data_set = pd.read_excel(path)
         except FileNotFoundError:
-            print("No such File exists on given path!")
+            ctypes.windll.user32.MessageBoxW(None, "marksheet.xlsx does not exist!", 'GradeGen ALERT!!', 0x1000)
             sys.exit()
         self.max_column = len(self.data_set.columns)
 
