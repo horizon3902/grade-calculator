@@ -6,6 +6,7 @@ import ctypes
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+np.random.seed(0)
 
 class GradeGen:
     def __init__(self, path="DataSet//dataSetFormat.xlsx"):  # initialise constructor
